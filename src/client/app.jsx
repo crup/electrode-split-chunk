@@ -6,7 +6,7 @@ import React from "react";
 import { render, hydrate } from "react-dom";
 import { routes } from "./routes";
 import { BrowserRouter } from "react-router-dom";
-import { createStore } from "redux";
+import { createStore, compose, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./reducers";
 import { renderRoutes } from "react-router-config";
@@ -17,8 +17,22 @@ import { loadableReady } from "@loadable/component";
 //
 // Redux configure store with Hot Module Reload
 //
+
+const DEBUG = process.env.NODE_ENV === "development";
+const middlewares = [];
+
+const composeEnhancers =
+    typeof window === "object" &&
+        window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
+        DEBUG ?
+        window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+            // Specify extensions options like name
+            // actionsBlacklist, actionsCreators, serialize...
+        }) : compose;
+const enhancer = composeEnhancers(applyMiddleware(...middlewares));
+
 const configureStore = initialState => {
-  const store = createStore(rootReducer, initialState);
+  const store = createStore(rootReducer, initialState, enhancer);
 
   if (module.hot) {
     module.hot.accept("./reducers", () => {

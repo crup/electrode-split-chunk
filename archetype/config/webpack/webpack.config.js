@@ -1,3 +1,5 @@
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+
 module.exports = {
     optimization: {
         splitChunks: {
@@ -9,5 +11,10 @@ module.exports = {
             }
           }
         }
+    },
+    config: {
+      plugins: [
+        new BundleAnalyzerPlugin()
+      ]
     }
   };

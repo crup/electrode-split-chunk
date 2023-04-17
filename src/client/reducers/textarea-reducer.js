@@ -1,8 +1,8 @@
-export const showFakeComp = (store, action) => {
-    if (action.type === "SHOW_FAKE_COMP") {
+export const textarea = (store, action) => {
+    if (action.type === "INPUT_TEXT_AREA") {
       return {
         value: action.value
       };
     }
-    return store || { value: false };
+    return store || { value: "" };
 };
