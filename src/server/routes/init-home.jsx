@@ -1,11 +1,17 @@
-// import reducer from "../../client/reducers/home.reducer";
+const store = initialState => {
+    return new Promise(resolve => {
+        resolve({
+            initialState
+        });
+    });
+};
 
-export default function initTop() {
-  return {
-    initialState: {
-      checkBox: { checked: false },
-      number: { value: 999 },
+export default async () => {
+  return store(
+    {
+      checkBox: { checked: true },
+      number: { value: 888 },
       showFakeComp: { value: true }
     }
-  };
-}
+  );
+};

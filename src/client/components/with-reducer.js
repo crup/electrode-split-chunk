@@ -16,8 +16,8 @@ export default function withReducer(reducer, mapStateToProps, mapDispatchToProps
       }
 
       injectReducer() {
-        if (typeof window === "object") {            
-            Object.keys(reducer).forEach(key => store.injectReducer(key, reducer[key]));
+        if (typeof window === "object") {
+          store.injectReducer(reducer);
         } else {
           console.error(
             `Could not inject reducer because the store is invalid.`
