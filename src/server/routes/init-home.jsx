@@ -1,7 +1,12 @@
+import homeReducer from "../../client/reducers/home.reducer";
+
 const store = initialState => {
     return new Promise(resolve => {
         resolve({
-            initialState
+          reducer: {
+            ...homeReducer
+          },
+          initialState
         });
     });
 };
