@@ -63,7 +63,7 @@ const startServer = config =>
 
 module.exports = function electrodeServer(userConfig, callback) {
   const promise = Promise.resolve(userConfig)
-    .tap(setDevMiddleware)
+    // .tap(setDevMiddleware)
     .tap(setStaticPaths)
     .tap(setRouteHandler)
     .tap(startServer);

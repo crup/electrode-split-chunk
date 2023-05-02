@@ -1,4 +1,4 @@
-import reducer from "../../client/reducers";
+import reducer from "../../client/reducers/home.reducer";
 
 export default function initTop() {
   return {
@@ -6,9 +6,9 @@ export default function initTop() {
     initialState: {
       checkBox: { checked: false },
       number: { value: 999 },
-      username: { value: "" },
-      textarea: { value: "" },
-      selectedOption: { value: "0-13" },
+      // username: { value: "" },
+      // textarea: { value: "" },
+      // selectedOption: { value: "0-13" },
       showFakeComp: { value: true }
     }
   };

@@ -1,20 +1,29 @@
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
-module.exports = {
-    optimization: {
+module.exports = (composer, options, compose) => {
+    const config = compose();
+    config.output = {
+        ...config.output
+    };
+
+    config.plugins = [
+        ...config.plugins,
+        // new BundleAnalyzerPlugin()
+    ]
+    config.optimization = {
         splitChunks: {
-          cacheGroups: {
-            vendor: {
-              test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
-              name: "vendor",
-              chunks: "all"
+            cacheGroups: {
+                nodeVendors: {
+                    name: "nodeVendors",
+                    test: /[\\/]node_modules[\\/]/,
+                    chunks: "initial",
+                    priority: 1
+                }
             }
-          }
         }
-    },
-    config: {
-      plugins: [
-        new BundleAnalyzerPlugin()
-      ]
-    }
-  };
+    };
+
+
+    return config;
+};
+

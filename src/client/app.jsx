@@ -6,11 +6,13 @@ import React from "react";
 import { render, hydrate } from "react-dom";
 import { routes } from "./routes";
 import { BrowserRouter } from "react-router-dom";
-import { createStore, compose, applyMiddleware } from "redux";
+import { compose, applyMiddleware, combineReducers } from "redux";
 import { Provider } from "react-redux";
-import rootReducer from "./reducers";
+// import rootReducer from "./reducers/home.reducer";
+import { baseReducer } from "./reducers/base-reducer";
 import { renderRoutes } from "react-router-config";
 import { loadableReady } from "@loadable/component";
+import { configureStore } from "./reducers/reducer-manager";
 
 //
 
@@ -31,20 +33,28 @@ const composeEnhancers =
         }) : compose;
 const enhancer = composeEnhancers(applyMiddleware(...middlewares));
 
-const configureStore = initialState => {
-  const store = createStore(rootReducer, initialState, enhancer);
 
-  if (module.hot) {
-    module.hot.accept("./reducers", () => {
-      const nextRootReducer = require("./reducers").default;
-      store.replaceReducer(nextRootReducer);
-    });
-  }
-
-  return store;
+const createReducer = asyncReducers => {
+  return combineReducers({
+    ...baseReducer,
+    ...asyncReducers
+  });
 };
 
-const store = configureStore(window.__PRELOADED_STATE__);
+// const configureStore = initialState => {
+//   const store = createStore(createReducer(), initialState, enhancer);
+
+//   if (module.hot) {
+//     module.hot.accept("./reducers/base-reducer", () => {
+//       const nextRootReducer = require("./reducers/base-reducer").default;
+//       store.replaceReducer(nextRootReducer);
+//     });
+//   }
+
+//   return store;
+// };
+
+export const store = configureStore(createReducer(), window.__PRELOADED_STATE__, enhancer);
 
 const start = App => {
   const jsContent = document.querySelector(".js-content");

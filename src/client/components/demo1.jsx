@@ -5,6 +5,9 @@ import { Nav } from "./nav";
 import { inputName, inputTextarea, selectOption } from "../actions";
 import custom from "../styles/custom.css"; // eslint-disable-line no-unused-vars
 import demoStyle from "../styles/demo1.css"; // eslint-disable-line no-unused-vars
+import demo1Reducer from "../reducers/demo1.reducer";
+import { store } from "../app";
+import withReducer from "./with-reducer";
 
 class Demo1 extends Component {
   constructor(props) {
@@ -80,7 +83,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  dispatch => ({ dispatch })
-)(Demo1);
+export default withReducer(demo1Reducer, mapStateToProps, dispatch => ({ dispatch }))(Demo1);

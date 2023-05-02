@@ -24,11 +24,15 @@ import DemoPureStates from "./demo-pure-states";
 import { DemoButtons } from "./demo-buttons";
 import DemoDynamicImport from "./demo-dynamic-import";
 import { Nav } from "./nav";
-
+// import { checkBox } from "../reducers/checkbox-reducer";
+// import { number } from "../reducers/number-reducer";
 //
 
 //
 import config from "electrode-ui-config";
+import homeReducer from "../reducers/home.reducer";
+import withReducer from "./with-reducer";
+// import homeReducer from "../reducers/home.reducer";
 //
 
 //
@@ -37,6 +41,7 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
   }
+  
 
   render() {
     return (
@@ -87,9 +92,14 @@ class Home extends React.Component {
 
 Home.propTypes = {};
 
-const mapStateToProps = state => state;
+const mapStateToProps = (state) => {
+  return state;
+};
 
-export default connect(
-  mapStateToProps,
-  dispatch => ({ dispatch })
-)(Home);
+export default withReducer(homeReducer, mapStateToProps, dispatch => ({ dispatch }))(Home);
+
+
+// export default injectReducer(homeReducer)(connect(
+//   mapStateToProps,
+//   dispatch => ({ dispatch })
+// )(Home));

@@ -1,8 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Home from "./components/home";
-import Demo1 from "./components/demo1";
-import Demo2 from "./components/demo2";
+import loadable from "@loadable/component";
+// import Home from "./components/home";
+// import Demo1 from "./components/demo1";
+// import Demo2 from "./components/demo2";
+const Home = loadable(() => import("./components/home"), { ssr: true });
+const Demo1 = loadable(() => import("./components/demo1"), { ssr: true });
+const Demo2 = loadable(() => import("./components/demo2"), { ssr: true });
 import { withRouter } from "react-router-dom";
 import { renderRoutes } from "react-router-config";
 

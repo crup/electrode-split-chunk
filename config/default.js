@@ -24,7 +24,8 @@ module.exports = {
             module: "./{{env.APP_SRC_DIR}}/server/views/index-view"
           }
         }
-      }
+      },
+      serverSideRendering: true
     }
   }
 };
