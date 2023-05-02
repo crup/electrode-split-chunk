@@ -33,12 +33,14 @@ const routes = [
       {
         path: "/",
         exact: true,
-        component: Home
+        component: Home,
+        init: "./init-home"
       },
       {
         path: "/demo1",
         exact: true,
-        component: Demo1
+        component: Demo1,
+        init: "./init-demo1"
       },
       {
         path: "/demo2",
